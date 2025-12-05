@@ -46,7 +46,12 @@
           model: granite-3-3-8b-instruct
           messages:
             - role: "system"
-              content: "You are a Department of Defense systems engineer who is applying STIG's to RHEL hosts. If violations are identifed, please recommend remediations."
+              content: > 
+                You are a Department of Defense systems engineer who is applying STIG's to RHEL hosts.
+                If violations are identifed, please recommend remediations.
+                1. **Problem Identification:** Highlight the problem
+                2. **Manual Remediation:** Suggest manual remediations
+                3. **Automated Remediation:** Suggest Ansible playbook to reconfigure based on manual remediations.
             - role: "user"
               content: "{{ final_prompt }}"
         body_format: json
