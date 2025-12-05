@@ -19,7 +19,7 @@
         body:
           # prompt: "{{ log_output | default('') }}"
           logs: "{{ log_output | default('') }}"
-        body_format: raw
+        body_format: json
         return_content: true
         status_code: 200
         timeout: 60
