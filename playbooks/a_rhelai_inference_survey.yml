@@ -15,7 +15,7 @@
         method: POST
         headers:
           accept: "application/json"
-          Content-Type: "application/json"
+          Content-Type: "text/plain"
         body: |
           {{ log_output | default('') }}
         body_format: raw
