@@ -51,24 +51,28 @@
         timeout: 120
       register: rca_response
 
-    - name: Check if response is JSON and debug output
+    - name: debug RCA response
       ansible.builtin.debug:
-        msg: "{{ gpt_response.json if gpt_response.json is defined else gpt_response.content }}"
+        msg: "{{ rca_response }}"
 
-    - name: Check if response is JSON and debug rca output
-      ansible.builtin.debug:
-        msg: "{{ rca_response.json if rca_response.json is defined else rca_response.content }}"
+    # - name: Check if response is JSON and debug output
+    #   ansible.builtin.debug:
+    #     msg: "{{ gpt_response.json if gpt_response.json is defined else gpt_response.content }}"
 
-    - name: Set stats for next controller job
-      ansible.builtin.set_stats:
-        data:
-          gpt_response: "{{ gpt_response }}"
-          rca_response: "{{ rca_response }}"
+    # - name: Check if response is JSON and debug rca output
+    #   ansible.builtin.debug:
+    #     msg: "{{ rca_response.json if rca_response.json is defined else rca_response.content }}"
 
-    - name: Debug gpt response
-      ansible.builtin.debug:
-        var: gpt_response
+    # - name: Set stats for next controller job
+    #   ansible.builtin.set_stats:
+    #     data:
+    #       gpt_response: "{{ gpt_response }}"
+    #       rca_response: "{{ rca_response }}"
 
-    - name: Debug RCA response
-      ansible.builtin.debug:
-        var: rca_response
+    # - name: Debug gpt response
+    #   ansible.builtin.debug:
+    #     var: gpt_response
+
+    # - name: Debug RCA response
+    #   ansible.builtin.debug:
+    #     var: rca_response
