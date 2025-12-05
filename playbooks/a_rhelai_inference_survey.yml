@@ -62,7 +62,7 @@
 
     - name: Get message content
       ansible.builtin.set_fact:
-        pretty_rca: "{{ rca_response.content[0].choices[0].content }}"
+        pretty_rca: "{{ rca_response.content.choices[0].content }}"
 
     - name: debug RCA response
       ansible.builtin.debug:
