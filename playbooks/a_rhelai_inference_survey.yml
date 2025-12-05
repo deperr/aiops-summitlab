@@ -18,7 +18,8 @@
           Content-Type: "application/json"
         body:
           # prompt: "{{ log_output | default('') }}"
-          logs: "{{ log_output | default('') }}"
+          loc:
+            logs: "{{ log_output | default('') }}"
         body_format: json
         return_content: true
         status_code: 200
