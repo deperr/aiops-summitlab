@@ -15,7 +15,7 @@
           Content-Type: "application/json"
         body:
           prompt: "{{ rag_prompt | default('') }}"
-        body_format: text
+        body_format: json
         return_content: true
         status_code: 200
         timeout: 60
