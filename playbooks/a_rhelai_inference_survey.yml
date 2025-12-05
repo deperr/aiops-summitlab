@@ -23,6 +23,9 @@
         timeout: 60
       register: rag_response
 
+    - name: Inject output from RAG
+      
+
     - name: Combine output and set fact
       ansible.builtin.set_fact:
         final_prompt: |
@@ -35,8 +38,6 @@
           Log output: ## Add survey into AAP template
           {{ log_output }}
 
-
-
     - name: Send RCA prompt to RHEL AI (Root Cause Analysis)
       ansible.builtin.uri:
         url: https://granite-3-3-8b-instruct-maas-apicast-production.apps.prod.rhoai.rh-aiservices-bu.com:443/v1/completions
@@ -46,7 +47,7 @@
           Content-Type: "application/json"
           Authorization: "Bearer {{ token }}"
         body:
-          prompt: "{{ rag_response }}"
+          prompt: "{{ final_prompt }}"
         body_format: json
         return_content: true
         status_code: 200
