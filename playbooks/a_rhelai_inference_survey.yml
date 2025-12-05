@@ -46,7 +46,7 @@
           model: granite-3-3-8b-instruct
           messages:
             - role: "system"
-              content: "You are a Department of Defense systems engineer who is applying STIG's to RHEL hosts."
+              content: "You are a Department of Defense systems engineer who is applying STIG's to RHEL hosts. If violations are identifed, please recommend remediations."
             - role: "user"
               content: "{{ final_prompt }}"
         body_format: json
