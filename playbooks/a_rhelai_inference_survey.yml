@@ -17,8 +17,9 @@
           accept: "text/plain"
           Content-Type: "text/plain"
         body:
-          prompt: "{{ log_output | default('') }}"
-        body_format: json
+          # prompt: "{{ log_output | default('') }}"
+          "{{ log_output | default('') }}"
+        body_format: raw
         return_content: true
         status_code: 200
         timeout: 60
