@@ -27,17 +27,17 @@
       ansible.builtin.set_fact:
         final_prompt: |
           You are a Department of Defense systems engineer who is applying STIG's to
-          RHEL hosts. Examine
+          RHEL hosts.
 
           RAG Context:
           {{ rag_response }}
 
-          Log output: ## Add survey into AAP template
+          Log output:
           {{ log_output }}
 
     - name: Send RCA prompt to RHEL AI (Root Cause Analysis)
       ansible.builtin.uri:
-        url: https://granite-3-3-8b-instruct-maas-apicast-production.apps.prod.rhoai.rh-aiservices-bu.com:443/v1/completions
+        url: https://granite-3-3-8b-instruct-maas-apicast-production.apps.prod.rhoai.rh-aiservices-bu.com:443/v1/chat/completions
         method: POST
         headers:
           accept: "application/json"
