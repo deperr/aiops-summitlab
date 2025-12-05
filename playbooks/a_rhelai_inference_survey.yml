@@ -23,9 +23,6 @@
         timeout: 60
       register: rag_response
 
-    - name: Inject output from RAG
-      
-
     - name: Combine output and set fact
       ansible.builtin.set_fact:
         final_prompt: |
