@@ -60,9 +60,13 @@
         timeout: 120
       register: rca_response
 
+    - name: Get message content
+      ansible.builtin.set_fact:
+        pretty_rca: "{{ rca_response.content[0].choices[0].content }}"
+
     - name: debug RCA response
       ansible.builtin.debug:
-        msg: "{{ rca_response | from_json}}"
+        msg: "{{ pretty_rca }}"
 
     # - name: Check if response is JSON and debug output
     #   ansible.builtin.debug:
