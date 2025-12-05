@@ -11,7 +11,7 @@
 
     - name: Send POST request using uri module
       ansible.builtin.uri:
-        url: http://ec2-3-17-78-213.us-east-2.compute.amazonaws.com:8000/stigs/query?logs=
+        url: "http://ec2-3-17-78-213.us-east-2.compute.amazonaws.com:8000/stigs/query?logs={{ log_output }}"
         method: POST
         headers:
           accept: "application/json"
