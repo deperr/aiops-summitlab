@@ -11,8 +11,8 @@
         url: http://ec2-3-17-78-213.us-east-2.compute.amazonaws.com:8000/stigs/query
         method: POST
         headers:
-          accept: "application/json"
-          Content-Type: "application/json"
+          accept: "text/plain"
+          Content-Type: "text/plain"
         body:
           prompt: "{{ rag_prompt | default('') }}"
         body_format: json
