@@ -20,7 +20,7 @@
           # prompt: "{{ log_output | default('') }}"
           query:
             logs: "{{ log_output | default('') }}"
-        body_format: json
+        body_format: text
         return_content: true
         status_code: 200
         timeout: 60
