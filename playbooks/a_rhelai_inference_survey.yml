@@ -16,9 +16,8 @@
         headers:
           accept: "application/json"
           Content-Type: "application/json"
-        body:
-          # prompt: "{{ log_output | default('') }}"
-          "{{ log_output | default('') }}"
+        body: |
+          {{ log_output | default('') }}
         body_format: raw
         return_content: true
         status_code: 200
