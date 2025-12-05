@@ -46,7 +46,7 @@
           model: granite-3-3-8b-instruct
           messages:
             - role: "system"
-              content: > 
+              content: | 
                 You are a Department of Defense systems engineer who is applying STIG's to RHEL hosts.
                 If violations are identifed, please recommend remediations.
                 1. **Problem Identification:** Highlight the problem
@@ -62,7 +62,7 @@
 
     - name: debug RCA response
       ansible.builtin.debug:
-        msg: "{{ rca_response }}"
+        msg: "{{ rca_response | from_json}}"
 
     # - name: Check if response is JSON and debug output
     #   ansible.builtin.debug:
