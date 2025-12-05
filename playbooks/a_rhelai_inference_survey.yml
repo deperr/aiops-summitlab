@@ -15,7 +15,7 @@
         method: POST
         headers:
           accept: "application/json"
-          Content-Type: "text/plain"
+          Content-Type: "application/json"
         body:
           # prompt: "{{ log_output | default('') }}"
           logs: "{{ log_output | default('') }}"
