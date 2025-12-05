@@ -19,7 +19,7 @@
           Content-Type: "text/plain"
         body: |
           # logs: {{ log_output | default('') }}
-          logs={{ log_output | default('') }}
+          query: {{ log_output | default('') }}
         body_format: raw
         return_content: true
         status_code: 200
