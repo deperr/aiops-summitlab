@@ -1,0 +1,74 @@
+---
+- name: Send API request and debug complete response
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    # - name: Set facts
+    #   ansible.builtin.set_fact:
+
+    - name: Send POST request using uri module
+      ansible.builtin.uri:
+        url: http://ec2-3-17-78-213.us-east-2.compute.amazonaws.com:8000/stigs/query
+        method: POST
+        headers:
+          accept: "text"
+          Content-Type: "application/json"
+        body:
+          prompt: "{{ rag_prompt | default('') }}"
+        body_format: text
+        return_content: true
+        status_code: 200
+        timeout: 60
+      register: rag_response
+
+    - name: Combine output and set fact
+      ansible.builtin.set_fact:
+        final_prompt: |
+          You are a Department of Defense systems engineer who is applying STIG's to
+          RHEL hosts. Examine
+
+          RAG Context:
+          {{ rag_response }}
+
+          Log output: ## Add survey into AAP template
+          {{ log_output }}
+
+
+
+    - name: Send RCA prompt to RHEL AI (Root Cause Analysis)
+      ansible.builtin.uri:
+        url: https://granite-3-3-8b-instruct-maas-apicast-production.apps.prod.rhoai.rh-aiservices-bu.com:443/v1/completions
+        method: POST
+        headers:
+          accept: "application/json"
+          Content-Type: "application/json"
+          Authorization: "Bearer c48a351bca82fdaf0c3709a5bb909314"
+        body:
+          prompt: "{{ rag_response }}"
+        body_format: json
+        return_content: true
+        status_code: 200
+        timeout: 120
+      register: rca_response
+
+    - name: Check if response is JSON and debug output
+      ansible.builtin.debug:
+        msg: "{{ gpt_response.json if gpt_response.json is defined else gpt_response.content }}"
+
+    - name: Check if response is JSON and debug rca output
+      ansible.builtin.debug:
+        msg: "{{ rca_response.json if rca_response.json is defined else rca_response.content }}"
+
+    - name: Set stats for next controller job
+      ansible.builtin.set_stats:
+        data:
+          gpt_response: "{{ gpt_response }}"
+          rca_response: "{{ rca_response }}"
+
+    - name: Debug gpt response
+      ansible.builtin.debug:
+        var: gpt_response
+
+    - name: Debug RCA response
+      ansible.builtin.debug:
+        var: rca_response
